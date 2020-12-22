@@ -1,13 +1,11 @@
 import Axios from "axios";
-import {API_URL} from "../Enum/EnvironmentVariable";
+import {API_URL, START_MAP_URL} from "../Enum/EnvironmentVariable";
 import {RoomConnection} from "./RoomConnection";
 import {PositionInterface, ViewportInterface} from "./ConnexionModels";
 import {GameConnexionTypes, urlManager} from "../Url/UrlManager";
 import {localUserStore} from "./LocalUserStore";
 import {LocalUser} from "./LocalUser";
 import {Room} from "./Room";
-
-const URL_ROOM_STARTED = '/Floor0/floor0.json';
 
 class ConnectionManager {
     private localUser!:LocalUser;
@@ -50,8 +48,7 @@ class ConnectionManager {
             }
             let roomId: string
             if (connexionType === GameConnexionTypes.empty) {
-                const defaultMapUrl = window.location.host.replace('play.', 'maps.') + URL_ROOM_STARTED;
-                roomId = urlManager.editUrlForRoom(defaultMapUrl, null, null);
+                roomId = urlManager.editUrlForRoom(START_MAP_URL, null, null);
             } else {
                 roomId = window.location.pathname + window.location.hash;
             }
